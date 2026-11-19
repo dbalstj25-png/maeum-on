@@ -5,5 +5,5 @@
  * 아직 측정 ID가 없다면 빈 문자열로 두면 통계 스크립트가 실행되지 않습니다.
  */
 window.MAUMON_CONFIG = {
-  googleAnalyticsId: "G-16372964115"
+  googleAnalyticsId: "G-6TLBL72F49"
 };
