@@ -317,7 +317,7 @@
         // Update Care Studio & Onboarding subtitles with personalized context
         $('careSubtitle').textContent = `최근 점검 결과 [${type.name} · ${type.short}]에 맞춘 호흡과 감정 정리 도구입니다.`;
         if ($('onboardingSubtitle')) {
-          $('onboardingSubtitle').textContent = `최근 점검 결과 [${type.name} · ${type.short}]에 맞춰 전문가와의 첫 만남을 미리 경험하고 방문 메모를 준비하세요.`;
+          $('onboardingSubtitle').textContent = `최근 점검 결과 [${type.name} · ${type.short}]에 맞춰 정신건강기관의 특징과 방문 전에 알아둘 정보를 확인해 보세요.`;
         }
 
         // Save to local history
@@ -730,17 +730,7 @@
       $('startButton').addEventListener('click', () => startFreshQuiz());
       $('resumeQuizBtn').addEventListener('click', () => { switchPlatformView('quiz'); renderQuestion(); });
 
-      /* ================= ONBOARDING & INITIAL INTERVIEW PREVIEW ================= */
-      document.querySelectorAll('#onboardingScreen .sim-tabs .chip-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('#onboardingScreen .sim-tabs .chip-btn').forEach(b => b.classList.remove('active'));
-          document.querySelectorAll('#onboardingScreen .sim-panel').forEach(p => p.classList.remove('active'));
-          btn.classList.add('active');
-          const target = $(btn.dataset.sim);
-          if (target) target.classList.add('active');
-        });
-      });
-
+      /* ================= ONBOARDING FAQ ================= */
       document.querySelectorAll('#onboardingFaqList .faq-header').forEach(header => {
         header.addEventListener('click', () => {
           const item = header.parentElement;
@@ -750,49 +740,12 @@
         });
       });
 
-      $('copyPreMemoBtn').addEventListener('click', () => {
-        const m1 = $('preMemo1').value.trim();
-        const m2 = $('preMemo2').value.trim();
-        const m3 = $('preMemo3').value.trim();
-        if (!m1 && !m2 && !m3) {
-          showToast('복사할 메모 내용을 먼저 입력해 주세요.');
-          return;
-        }
-        const assessments = loadStorage(STORAGE_KEYS.assessments);
-        const latestInfo = assessments.length
-          ? `최근 자가점검 유형: ${assessments[0].typeName} (${assessments[0].typeShort} · 우울 ${assessments[0].totals.depression}/불안 ${assessments[0].totals.anxiety}/스트레스 ${assessments[0].totals.stress})`
-          : '';
-        const lines = [
-          '[마음온 · 초기 면담 사전 메모]',
-          ...(latestInfo ? [latestInfo] : []),
-          `1. 가장 힘든 점: ${m1 || '-'}`,
-          `2. 시작 시기/상황: ${m2 || '-'}`,
-          `3. 궁금한/바라는 점: ${m3 || '-'}`
-        ];
-        const text = lines.join('\n');
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text)
-            .then(() => showToast('초기 면담 사전 메모가 클립보드에 복사되었습니다.'))
-            .catch(() => window.prompt('아래 메모를 복사해 주세요.', text));
-        } else {
-          window.prompt('아래 메모를 복사해 주세요.', text);
-        }
-      });
-
-      $('clearPreMemoBtn').addEventListener('click', () => {
-        $('preMemo1').value = '';
-        $('preMemo2').value = '';
-        $('preMemo3').value = '';
-        showToast('사전 메모 입력칸을 초기화했습니다.');
-      });
-
       $('quickCareBtn').addEventListener('click', () => switchPlatformView('care'));
       $('quickOnboardingBtn').addEventListener('click', () => switchPlatformView('onboarding'));
       $('goCareFromResultBtn').addEventListener('click', () => switchPlatformView('care'));
       $('goOnboardingFromResultBtn').addEventListener('click', () => switchPlatformView('onboarding'));
       $('goHistoryFromResultBtn').addEventListener('click', () => switchPlatformView('history'));
       $('backToCheckFromCare').addEventListener('click', () => switchPlatformView('check'));
-      $('goSupportFromOnboardingBtn').addEventListener('click', () => switchPlatformView('support'));
 
       choiceButtons.forEach(btn => btn.addEventListener('click', () => choose(Number(btn.dataset.score))));
       $('nextButton').addEventListener('click', next);
