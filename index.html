@@ -16,6 +16,52 @@
 #onboardingScreen .warning-note { font-size: 12px; line-height: 1.7; color: #786a70; padding: 12px; background: #f6f2f1; border-radius: 12px; }
 #onboardingScreen .warning-urgent { font-size: 13px; line-height: 1.75; color: #704e59; background: #fff0f0; border: 1px solid #efd5d8; border-radius: 12px; padding: 12px; margin-top: 12px; }
 </style>
+
+  <!-- 웹툰 전용 스타일: 기존 CSS, 지도, 자가점검 기능은 수정하지 않음 -->
+  <style>
+    .maeum-comic-image-viewport { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 16px; }
+    .maeum-comic-artwork { display: block; width: 100%; height: auto; border-radius: 16px; }
+    .maeum-comic-image-note { font-size: 13px; color: #73636b; line-height: 1.65; margin: 8px 0 16px; }
+    .maeum-comic-image-note a { color: #855464; text-decoration: underline; text-underline-offset: 3px; }
+    @media (max-width: 720px) { .maeum-comic-artwork { min-width: 990px; } }
+  </style>
+<style id="maeum-instatoon-style">
+/* 기관별 탭 + 4컷 개별 넘기기. 다른 화면에는 스타일을 적용하지 않습니다. */
+#maeumInstatoonCover {max-width:740px;margin:10px auto 24px;background:#fffbf8;border:1px solid #eddfe0;border-radius:20px;overflow:hidden;box-shadow:0 8px 22px rgba(111,74,82,.06)}
+#maeumInstatoonCover summary {list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;color:#6a5059;font-weight:800;font-size:.99rem}
+#maeumInstatoonCover summary::-webkit-details-marker{display:none}
+#maeumInstatoonCover summary::after{content:'⌄';font-size:1.4rem;transition:transform .15s}
+#maeumInstatoonCover[open] summary::after{transform:rotate(180deg)}
+#maeumInstatoonCover .instatoon-cover-link{display:block;max-width:500px;margin:0 auto 14px;padding:0 12px}
+#maeumInstatoonCover .instatoon-cover-link img{display:block;width:100%;height:auto;max-width:100%;border-radius:12px}
+.instatoon-guide-label{margin:16px 0 10px;display:flex;flex-direction:column;gap:3px;color:#5e4e55}
+.instatoon-guide-label b{font-size:1.03rem}
+.instatoon-guide-label span{font-size:.88rem;color:#827178}
+#maeumInstatoon{max-width:720px;margin:14px auto 19px;padding:16px;background:#fffbf9;border:1px solid #eddddc;border-radius:22px;box-shadow:0 12px 30px rgba(105,78,83,.07)}
+#maeumInstatoon .instatoon-intro{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:0 3px 12px;color:#59484f}
+#maeumInstatoon .instatoon-intro strong{font-size:1.12rem;display:block;line-height:1.35}
+#maeumInstatoon .instatoon-intro small{display:block;margin-top:4px;color:#86747b;font-size:.82rem}
+#maeumInstatoon .instatoon-page-count{white-space:nowrap;background:#f6e9eb;border-radius:999px;padding:7px 12px;color:#845665;font-size:.89rem;font-weight:800;font-variant-numeric:tabular-nums}
+#maeumInstatoon .instatoon-stage{position:relative;outline-offset:5px;touch-action:pan-y}
+#maeumInstatoon .instatoon-page{display:block;margin:0}
+#maeumInstatoon .instatoon-page[hidden]{display:none!important}
+#maeumInstatoon .instatoon-page-link{display:block;border-radius:14px;overflow:hidden;border:1px solid #e9dbd9;background:#fcfaf7}
+#maeumInstatoon .instatoon-page img{display:block;width:100%;height:auto;max-width:100%;object-fit:contain}
+#maeumInstatoon .instatoon-caption{padding:11px 4px 2px;text-align:center;color:#5f4c55;font-size:.96rem;font-weight:700}
+#maeumInstatoon .instatoon-controls{display:grid;grid-template-columns:minmax(80px,1fr) auto minmax(80px,1fr);gap:12px;align-items:center;margin:12px 2px 0}
+#maeumInstatoon .instatoon-nav{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 9px;border-radius:13px;background:#f9edef;border:1px solid #e8d6d8;color:#704b58;font:inherit;font-size:.95rem;font-weight:800;cursor:pointer;min-height:43px}
+#maeumInstatoon .instatoon-nav:last-child{background:#ad7888;border-color:#ad7888;color:white}
+#maeumInstatoon .instatoon-nav:disabled{opacity:.38;cursor:not-allowed}
+#maeumInstatoon .instatoon-nav span{font-size:1.3rem;line-height:.8}
+#maeumInstatoon .instatoon-dots{display:flex;align-items:center;justify-content:center;gap:7px}
+#maeumInstatoon .instatoon-dot{background:#dccdd0;border:0;border-radius:99px;width:10px;height:10px;padding:0;cursor:pointer}
+#maeumInstatoon .instatoon-dot.active{width:26px;background:#b57f91}
+#maeumInstatoon .instatoon-help{text-align:center;color:#8b7a80;font-size:.82rem;line-height:1.5;margin:10px 0 0}
+.instatoon-details-label{margin:20px 2px 9px;display:flex;flex-direction:column;gap:5px;color:#604f57}
+.instatoon-details-label b{font-size:1.03rem}
+.instatoon-details-label span{font-size:.85rem;color:#827278}
+@media(max-width:540px){#maeumInstatoon{margin:12px -4px 18px;padding:9px;border-radius:16px}#maeumInstatoon .instatoon-controls{gap:5px;grid-template-columns:minmax(68px,1fr) auto minmax(68px,1fr)}#maeumInstatoon .instatoon-nav{min-height:42px;font-size:.84rem;padding:8px 4px}#maeumInstatoon .instatoon-intro strong{font-size:1rem}#maeumInstatoon .instatoon-page-link{border-radius:11px}}
+</style>
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -382,57 +428,119 @@
               <h3>내 마음이 힘들 때, 어디로 가야 할까?</h3>
               <p>도움받고 싶은 내용에 따라 찾아갈 수 있는 기관과 서비스를 살펴보세요. 한 기관만 정답인 것은 아니며, 필요에 따라 여러 기관을 함께 이용하거나 연계할 수 있어요.</p>
             </div>
-            <div class="maeum-guide-tabs" role="tablist" aria-label="정신건강 지원기관 선택">
-              <button class="maeum-guide-tab active" type="button" role="tab" aria-selected="true" aria-controls="guide-psychiatry" data-guide-tab="guide-psychiatry">🏥 정신건강의학과</button>
+            <!-- 인스타툰: 표지 다음에 기관을 선택하고 각 기관의 4컷을 하나씩 넘깁니다. -->
+<details class="instatoon-cover" id="maeumInstatoonCover" open>
+ <summary>📖 인스타툰 표지 <span style="font-size:.83rem;font-weight:600;color:#8c737b">눌러서 접거나 펼칠 수 있어요</span></summary>
+ <a class="instatoon-cover-link" href="assets/comic/instatoon-00-cover.png" target="_blank" rel="noopener noreferrer" aria-label="표지 원본 이미지 크게 보기"><img src="assets/comic/instatoon-00-cover.png" alt="내 마음이 힘들 때, 어디로 가야 할까? 정신건강 지원기관 안내 표지" loading="eager" decoding="async" width="2048" height="2048"></a>
+</details>
+<div class="instatoon-guide-label"><b>어떤 기관이 궁금한가요?</b><span>기관을 선택하면 해당 기관의 4컷 만화를 한 컷씩 넘겨 볼 수 있어요.</span></div>
+<div class="maeum-guide-tabs" role="tablist" aria-label="정신건강 지원기관 선택">
+              <button class="maeum-guide-tab active" type="button" role="tab" aria-selected="true" aria-controls="guide-psychiatry" data-guide-tab="guide-psychiatry">🏥 정신건강의학과(의원)</button>
               <button class="maeum-guide-tab" type="button" role="tab" aria-selected="false" aria-controls="guide-counsel" data-guide-tab="guide-counsel">🛋️ 심리상담센터</button>
               <button class="maeum-guide-tab" type="button" role="tab" aria-selected="false" aria-controls="guide-community" data-guide-tab="guide-community">🌿 정신건강복지센터</button>
               <button class="maeum-guide-tab" type="button" role="tab" aria-selected="false" aria-controls="guide-family" data-guide-tab="guide-family">🏡 가족센터</button>
             </div>
-
-            <section class="maeum-guide-panel active" id="guide-psychiatry" role="tabpanel">
-              <div class="maeum-guide-heading"><span class="maeum-guide-number">01</span><div><h4>정신건강의학과</h4><p>증상과 일상생활의 어려움을 의료적으로 평가하고 치료받고 싶을 때</p></div></div>
-              <div class="maeum-comic-grid">
-                <figure><img src="assets/comic/strip1-panel1.webp" alt="잠을 이루지 못하고 힘들어하는 주인공"><figcaption><b>1컷. 혼자 견디기 힘들어요.</b><span>불면, 불안, 우울감이 이어지고 일상생활까지 어려워졌어요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip1-panel2.webp" alt="정신건강의학과 병원을 찾아가는 주인공"><figcaption><b>2컷. 진료를 받아볼까?</b><span>증상이 지속되거나 심해진다면 정신건강의학과에 방문할 수 있어요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip1-panel3.webp" alt="의사와 상담하며 상태를 설명하는 주인공"><figcaption><b>3컷. 상태를 함께 살펴봐요.</b><span>의사가 증상과 생활의 어려움을 듣고 필요한 평가와 치료 방법을 안내해요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip1-panel4.webp" alt="진료 후 안내 내용을 확인하는 주인공"><figcaption><b>4컷. 나에게 맞는 치료 계획을!</b><span>필요하면 약물치료, 심리치료 등 치료 계획을 세우고 경과를 살펴봐요.</span></figcaption></figure>
-              </div>
+<section class="instatoon-viewer" id="maeumInstatoon" aria-label="기관별 4컷 인스타툰 뷰어">
+ <div class="instatoon-intro"><div><strong id="instatoonTitle">정신건강의학과(의원)</strong><small>선택한 기관의 만화를 1컷씩 읽어보세요.</small></div><span class="instatoon-page-count" id="instatoonCount" aria-live="polite">1 / 4</span></div>
+ <div class="instatoon-stage" id="instatoonStage" tabindex="0" role="region" aria-roledescription="이미지 슬라이드" aria-label="이전·다음 버튼 또는 좌우 화살표 키로 한 컷씩 넘길 수 있습니다">
+  <figure class="instatoon-page" data-instatoon-group="guide-psychiatry" data-instatoon-cut="0">
+   <a class="instatoon-page-link" href="assets/comic/instatoon-psychiatry-01.webp" target="_blank" rel="noopener noreferrer" aria-label="정신건강의학과(의원) 1번째 컷 크게 보기"><img src="assets/comic/instatoon-psychiatry-01.webp" alt="정신건강의학과(의원): 혼자 견디기 힘들어요" loading="eager" decoding="async" width="462" height="452"></a>
+   <figcaption class="instatoon-caption">혼자 견디기 힘들어요</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-psychiatry" data-instatoon-cut="1" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-psychiatry-02.webp" target="_blank" rel="noopener noreferrer" aria-label="정신건강의학과(의원) 2번째 컷 크게 보기"><img src="assets/comic/instatoon-psychiatry-02.webp" alt="정신건강의학과(의원): 진료를 받아볼까?" loading="lazy" decoding="async" width="450" height="452"></a>
+   <figcaption class="instatoon-caption">진료를 받아볼까?</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-psychiatry" data-instatoon-cut="2" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-psychiatry-03.webp" target="_blank" rel="noopener noreferrer" aria-label="정신건강의학과(의원) 3번째 컷 크게 보기"><img src="assets/comic/instatoon-psychiatry-03.webp" alt="정신건강의학과(의원): 상태를 함께 살펴봐요" loading="lazy" decoding="async" width="464" height="457"></a>
+   <figcaption class="instatoon-caption">상태를 함께 살펴봐요</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-psychiatry" data-instatoon-cut="3" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-psychiatry-04.webp" target="_blank" rel="noopener noreferrer" aria-label="정신건강의학과(의원) 4번째 컷 크게 보기"><img src="assets/comic/instatoon-psychiatry-04.webp" alt="정신건강의학과(의원): 나에게 맞는 치료 계획" loading="lazy" decoding="async" width="451" height="457"></a>
+   <figcaption class="instatoon-caption">나에게 맞는 치료 계획</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-counsel" data-instatoon-cut="0" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-counseling-01.webp" target="_blank" rel="noopener noreferrer" aria-label="심리상담센터 1번째 컷 크게 보기"><img src="assets/comic/instatoon-counseling-01.webp" alt="심리상담센터: 내 마음을 잘 모르겠어요" loading="lazy" decoding="async" width="870" height="875"></a>
+   <figcaption class="instatoon-caption">내 마음을 잘 모르겠어요</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-counsel" data-instatoon-cut="1" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-counseling-02.webp" target="_blank" rel="noopener noreferrer" aria-label="심리상담센터 2번째 컷 크게 보기"><img src="assets/comic/instatoon-counseling-02.webp" alt="심리상담센터: 안전하게 이야기할 곳을 찾아요" loading="lazy" decoding="async" width="880" height="875"></a>
+   <figcaption class="instatoon-caption">안전하게 이야기할 곳을 찾아요</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-counsel" data-instatoon-cut="2" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-counseling-03.webp" target="_blank" rel="noopener noreferrer" aria-label="심리상담센터 3번째 컷 크게 보기"><img src="assets/comic/instatoon-counseling-03.webp" alt="심리상담센터: 내 이야기를 천천히 풀어봐요" loading="lazy" decoding="async" width="875" height="852"></a>
+   <figcaption class="instatoon-caption">내 이야기를 천천히 풀어봐요</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-counsel" data-instatoon-cut="3" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-counseling-04.webp" target="_blank" rel="noopener noreferrer" aria-label="심리상담센터 4번째 컷 크게 보기"><img src="assets/comic/instatoon-counseling-04.webp" alt="심리상담센터: 나를 이해하는 연습" loading="lazy" decoding="async" width="882" height="852"></a>
+   <figcaption class="instatoon-caption">나를 이해하는 연습</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-community" data-instatoon-cut="0" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-community-01.webp" target="_blank" rel="noopener noreferrer" aria-label="정신건강복지센터 1번째 컷 크게 보기"><img src="assets/comic/instatoon-community-01.webp" alt="정신건강복지센터: 어디에 물어봐야 할까요?" loading="lazy" decoding="async" width="883" height="897"></a>
+   <figcaption class="instatoon-caption">어디에 물어봐야 할까요?</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-community" data-instatoon-cut="1" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-community-02.webp" target="_blank" rel="noopener noreferrer" aria-label="정신건강복지센터 2번째 컷 크게 보기"><img src="assets/comic/instatoon-community-02.webp" alt="정신건강복지센터: 지역 센터에 문의해요" loading="lazy" decoding="async" width="866" height="897"></a>
+   <figcaption class="instatoon-caption">지역 센터에 문의해요</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-community" data-instatoon-cut="2" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-community-03.webp" target="_blank" rel="noopener noreferrer" aria-label="정신건강복지센터 3번째 컷 크게 보기"><img src="assets/comic/instatoon-community-03.webp" alt="정신건강복지센터: 필요한 도움을 함께 찾아요" loading="lazy" decoding="async" width="885" height="858"></a>
+   <figcaption class="instatoon-caption">필요한 도움을 함께 찾아요</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-community" data-instatoon-cut="3" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-community-04.webp" target="_blank" rel="noopener noreferrer" aria-label="정신건강복지센터 4번째 컷 크게 보기"><img src="assets/comic/instatoon-community-04.webp" alt="정신건강복지센터: 지역사회와 연결돼요" loading="lazy" decoding="async" width="864" height="858"></a>
+   <figcaption class="instatoon-caption">지역사회와 연결돼요</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-family" data-instatoon-cut="0" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-family-01.webp" target="_blank" rel="noopener noreferrer" aria-label="가족센터 1번째 컷 크게 보기"><img src="assets/comic/instatoon-family-01.webp" alt="가족센터: 가족과 대화가 어려워요" loading="lazy" decoding="async" width="854" height="854"></a>
+   <figcaption class="instatoon-caption">가족과 대화가 어려워요</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-family" data-instatoon-cut="1" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-family-02.webp" target="_blank" rel="noopener noreferrer" aria-label="가족센터 2번째 컷 크게 보기"><img src="assets/comic/instatoon-family-02.webp" alt="가족센터: 가족을 위한 도움을 찾아요" loading="lazy" decoding="async" width="811" height="854"></a>
+   <figcaption class="instatoon-caption">가족을 위한 도움을 찾아요</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-family" data-instatoon-cut="2" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-family-03.webp" target="_blank" rel="noopener noreferrer" aria-label="가족센터 3번째 컷 크게 보기"><img src="assets/comic/instatoon-family-03.webp" alt="가족센터: 서로의 입장을 이해해요" loading="lazy" decoding="async" width="854" height="887"></a>
+   <figcaption class="instatoon-caption">서로의 입장을 이해해요</figcaption>
+  </figure>
+  <figure class="instatoon-page" data-instatoon-group="guide-family" data-instatoon-cut="3" hidden>
+   <a class="instatoon-page-link" href="assets/comic/instatoon-family-04.webp" target="_blank" rel="noopener noreferrer" aria-label="가족센터 4번째 컷 크게 보기"><img src="assets/comic/instatoon-family-04.webp" alt="가족센터: 함께 변화하는 방법" loading="lazy" decoding="async" width="811" height="887"></a>
+   <figcaption class="instatoon-caption">함께 변화하는 방법</figcaption>
+  </figure>
+ </div>
+ <div class="instatoon-controls" aria-label="웹툰 컷 이동">
+  <button type="button" id="instatoonPrev" class="instatoon-nav" disabled aria-label="이전 컷"><span aria-hidden="true">‹</span> 이전 컷</button>
+  <div class="instatoon-dots" id="instatoonDots" role="group" aria-label="컷 바로 선택">
+   <button type="button" class="instatoon-dot active" data-instatoon-dot="0" aria-label="1번째 컷" aria-current="step"></button>
+   <button type="button" class="instatoon-dot" data-instatoon-dot="1" aria-label="2번째 컷" aria-current="false"></button>
+   <button type="button" class="instatoon-dot" data-instatoon-dot="2" aria-label="3번째 컷" aria-current="false"></button>
+   <button type="button" class="instatoon-dot" data-instatoon-dot="3" aria-label="4번째 컷" aria-current="false"></button>
+  </div>
+  <button type="button" id="instatoonNext" class="instatoon-nav" aria-label="다음 컷">다음 컷 <span aria-hidden="true">›</span></button>
+ </div>
+ <p class="instatoon-help">모바일에서는 좌우로 넘길 수 있어요. 이미지를 누르면 크게 볼 수 있어요.</p>
+</section>
+<div class="instatoon-details-label"><b>선택한 기관의 서비스·비용 안내</b><span>아래에서 해당 기관의 주요 서비스와 예상 비용을 확인하세요.</span></div>
+<section class="maeum-guide-panel active" id="guide-psychiatry" role="tabpanel">
+              <div class="maeum-guide-heading"><span class="maeum-guide-number">01</span><div><h4>정신건강의학과(의원)</h4><p>증상과 일상생활의 어려움을 의료적으로 평가하고 치료받고 싶을 때</p></div></div>
               <div class="maeum-info-grid"><div><b>이런 도움을 받을 수 있어요</b><p>정신건강의학과 전문의 진료, 증상 평가·진단, 약물치료 및 필요한 치료·검사 안내</p></div><div><b>예상 비용</b><p>건강보험 적용 여부, 의료기관, 진료·검사·약제에 따라 달라져요. 비급여 검사나 치료는 추가 비용이 발생할 수 있으니 예약 전 문의하세요.</p></div></div>
               <p class="maeum-guide-tip">기억해요: 상담을 받는다고 반드시 약을 복용하는 것은 아니에요. 치료 방법은 진료 후 의료진과 상의해 결정해요.</p>
             </section>
 
             <section class="maeum-guide-panel" id="guide-counsel" role="tabpanel" hidden>
               <div class="maeum-guide-heading"><span class="maeum-guide-number">02</span><div><h4>심리상담센터</h4><p>감정과 생각을 정리하고, 반복되는 고민이나 관계 문제를 깊이 이해하고 싶을 때</p></div></div>
-              <div class="maeum-comic-grid">
-                <figure><img src="assets/comic/strip2-panel1.webp" alt="고민을 떠올리며 생각에 잠긴 주인공"><figcaption><b>1컷. 내 마음을 잘 모르겠어요.</b><span>비슷한 고민이 반복되고 감정을 말로 표현하기 어려워요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip2-panel2.webp" alt="따뜻한 상담실에 들어서는 주인공"><figcaption><b>2컷. 안전하게 이야기할 곳을 찾아요.</b><span>상담 목표와 방식, 상담자의 자격과 비용을 확인하고 상담을 신청해요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip2-panel3.webp" alt="상담자와 대화를 나누는 주인공"><figcaption><b>3컷. 내 이야기를 천천히 풀어봐요.</b><span>상담자와 함께 감정, 생각, 관계와 생활 속 어려움을 살펴봐요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip2-panel4.webp" alt="상담을 통해 자신을 이해하고 미소 짓는 주인공"><figcaption><b>4컷. 나를 이해하는 연습을 해요.</b><span>상황에 맞는 대처 방법을 찾고 작은 변화를 연습해요.</span></figcaption></figure>
-              </div>
               <div class="maeum-info-grid"><div><b>이런 도움을 받을 수 있어요</b><p>개인·집단상담, 정서·관계 문제 탐색, 기관에 따라 심리검사와 부모·부부상담 등</p></div><div><b>예상 비용</b><p>민간 상담센터는 상담자·지역·회기 시간에 따라 비용이 달라요. 일부 대상자는 ‘정신건강 심리상담 바우처’로 총 8회 지원을 신청할 수 있으며, 1회 단가는 1급 8만 원·2급 7만 원, 본인부담은 자격·소득 기준에 따라 0~50%예요.</p></div></div>
               <p class="maeum-guide-tip">확인해요: 상담센터는 기관마다 자격과 제공 서비스가 달라요. 상담자의 자격·경력, 상담 방식, 회기당 비용과 취소 규정을 미리 확인하세요. 의료적 진단과 처방은 의료기관에서 받아야 해요.</p>
             </section>
 
             <section class="maeum-guide-panel" id="guide-community" role="tabpanel" hidden>
               <div class="maeum-guide-heading"><span class="maeum-guide-number">03</span><div><h4>정신건강복지센터</h4><p>어디서부터 도움을 받아야 할지 모르겠거나 지역사회에서 지속적인 지원과 연결이 필요할 때</p></div></div>
-              <div class="maeum-comic-grid">
-                <figure><img src="assets/comic/strip3-panel1.webp" alt="어떤 도움을 받을지 고민하는 주인공"><figcaption><b>1컷. 어디에 물어봐야 할까요?</b><span>마음이 힘든데 어떤 기관을 찾아야 할지 막막해요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip3-panel2.webp" alt="정신건강복지센터 담당자와 이야기하는 주인공"><figcaption><b>2컷. 지역 센터에 문의해요.</b><span>거주 지역 정신건강복지센터에 연락해 이용 가능한 서비스를 확인해요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip3-panel3.webp" alt="지역의 여러 지원기관을 안내받는 모습"><figcaption><b>3컷. 필요한 도움을 함께 찾아요.</b><span>초기상담을 통해 상황과 필요를 살피고 적절한 서비스나 기관을 안내받아요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip3-panel4.webp" alt="지원 정보를 들고 안심하는 주인공"><figcaption><b>4컷. 지역사회와 연결돼요.</b><span>필요에 따라 사례관리, 회복 지원, 교육·프로그램, 의료·복지 자원 연계를 받을 수 있어요.</span></figcaption></figure>
-              </div>
               <div class="maeum-info-grid"><div><b>이런 도움을 받을 수 있어요</b><p>정신건강 상담과 정보 제공, 조기 발견, 사례관리, 재활·회복 지원, 지역 의료·복지기관 연계 등</p></div><div><b>예상 비용</b><p>공공기관 서비스는 무료로 제공되는 경우가 많지만, 프로그램·검사·외부 서비스는 지역과 사업에 따라 다를 수 있어요. 이용 전 해당 센터에 확인하세요.</p></div></div>
               <p class="maeum-guide-tip">지역별로 운영 프로그램과 대상 기준이 달라요. 거주지 시·군·구 정신건강복지센터에 먼저 문의하면 이용 가능한 지원을 안내받을 수 있어요.</p>
             </section>
 
             <section class="maeum-guide-panel" id="guide-family" role="tabpanel" hidden>
               <div class="maeum-guide-heading"><span class="maeum-guide-number">04</span><div><h4>가족센터</h4><p>부부·부모자녀 갈등, 의사소통 어려움 등 가족관계 안에서 함께 풀어갈 문제가 있을 때</p></div></div>
-              <div class="maeum-comic-grid">
-                <figure><img src="assets/comic/strip4-panel1.webp" alt="가족 사이에서 갈등으로 속상해하는 주인공"><figcaption><b>1컷. 가족과 대화가 어려워요.</b><span>서로의 마음을 몰라 오해와 갈등이 반복돼요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip4-panel2.webp" alt="가족센터를 찾아가는 주인공"><figcaption><b>2컷. 가족을 위한 도움을 찾아요.</b><span>지역 가족센터에서 가족상담과 지원 프로그램을 알아봐요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip4-panel3.webp" alt="가족 구성원들이 상담자와 함께 대화하는 모습"><figcaption><b>3컷. 서로의 이야기를 들어봐요.</b><span>부부·부모자녀 상담 등을 통해 관계와 의사소통 방식을 살펴봐요.</span></figcaption></figure>
-                <figure><img src="assets/comic/strip4-panel4.webp" alt="가족이 함께 웃으며 대화하는 모습"><figcaption><b>4컷. 함께 바꿔갈 방법을 찾아요.</b><span>가족의 상황에 맞는 교육, 돌봄, 지역 자원과 연결될 수 있어요.</span></figcaption></figure>
-              </div>
               <div class="maeum-info-grid"><div><b>이런 도움을 받을 수 있어요</b><p>부부·부모자녀·이혼 전후 가족상담, 가족교육, 돌봄·사례관리, 가족관계 향상 프로그램 등</p></div><div><b>예상 비용</b><p>가족센터 상담은 무료 또는 실비 수준으로 운영되는 경우가 많아요. 심리검사나 일부 프로그램은 별도 비용이 있을 수 있으니 지역 센터에 확인하세요.</p></div></div>
               <p class="maeum-guide-tip">가족 전체가 함께 방문해야만 하는 것은 아니에요. 개인 상담이나 전화 문의부터 가능한지 센터에 확인해 보세요.</p>
             </section>
@@ -462,6 +570,15 @@
                 <div class="faq-body">
                   정신건강의학과 진료를 받았다는 이유만으로 모든 민간보험 가입이 거절되는 것은 아닙니다. 다만 진단명, 치료 시기, 약물 복용 여부, 현재 건강 상태 및 보험상품의 인수 기준에 따라 가입이 제한되거나 보험료·보장 조건이 달라질 수 있습니다.<br><br>
                   보험 가입 시에는 청약서에서 질문하는 관련 진료·치료 이력을 정확히 알려야 합니다. 구체적인 가입 가능 여부는 보험사와 상품별로 확인해 주세요.
+                </div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-header" type="button" aria-expanded="false">
+                  <span>Q. 기록이 남아서 취업이나 직장에 불이익이 생기지 않나요?</span><span class="faq-icon">+</span>
+                </button>
+                <div class="faq-body">
+                  심리상담센터의 상담 내용과 기록은 비밀보장 원칙에 따라 관리되며, 정신건강의학과 진료기록도 의료법에 따라 보호됩니다. 따라서 일반적인 회사나 채용 담당자가 상담·진료기록을 임의로 조회할 수는 없습니다.<br><br>
+                  다만 본인의 동의 또는 법률에서 정한 요건에 따라 진료기록이 제공될 수 있고, 상담기록 역시 안전 문제 등 비밀보장의 예외가 있을 수 있습니다. 채용과 관련한 별도의 건강요건은 직무나 관련 규정에 따라 달라질 수 있습니다.
                 </div>
               </div>
             </div>
@@ -558,5 +675,89 @@
 
 <script src="js/comic.js"></script>
 
+<script id="maeum-instatoon-controller">
+(() => {
+  'use strict';
+  const root = document.getElementById('maeumInstatoon');
+  const guide = document.getElementById('firstVisitComic');
+  if (!root || !guide) return;
+  const groups = [
+    {id:'guide-psychiatry',name:'정신건강의학과(의원)'},
+    {id:'guide-counsel',name:'심리상담센터'},
+    {id:'guide-community',name:'정신건강복지센터'},
+    {id:'guide-family',name:'가족센터'}
+  ];
+  const cuts = Array.from(root.querySelectorAll('[data-instatoon-group]'));
+  const dots = Array.from(root.querySelectorAll('[data-instatoon-dot]'));
+  const tabs = Array.from(guide.querySelectorAll('[data-guide-tab]'));
+  const prev = root.querySelector('#instatoonPrev');
+  const next = root.querySelector('#instatoonNext');
+  const title = root.querySelector('#instatoonTitle');
+  const count = root.querySelector('#instatoonCount');
+  const stage = root.querySelector('#instatoonStage');
+  if (!prev || !next || !title || !count || !stage || cuts.length !== 16 || dots.length !== 4) return;
+  let activeGroup='guide-psychiatry';
+  let activeCut=0;
+  function render() {
+    cuts.forEach(cut => {
+      const selected = cut.dataset.instatoonGroup===activeGroup && Number(cut.dataset.instatoonCut)===activeCut;
+      cut.hidden=!selected;
+      cut.setAttribute('aria-hidden',String(!selected));
+    });
+    dots.forEach((dot,i) => {
+      dot.classList.toggle('active',i===activeCut);
+      dot.setAttribute('aria-current',i===activeCut?'step':'false');
+    });
+    const found = groups.find(g=>g.id===activeGroup);
+    if(found) title.textContent=found.name;
+    count.textContent=`${activeCut+1} / 4`;
+    // 기존 기관별 상세정보도 선택한 탭과 항상 일치시키기
+    tabs.forEach(tab=>{
+      const selected=tab.dataset.guideTab===activeGroup;
+      tab.classList.toggle('active',selected);
+      tab.setAttribute('aria-selected',String(selected));
+      tab.tabIndex=selected?0:-1;
+    });
+    guide.querySelectorAll('.maeum-guide-panel').forEach(panel=>{
+      const selected=panel.id===activeGroup;
+      panel.classList.toggle('active',selected);
+      panel.hidden=!selected;
+      panel.setAttribute('aria-hidden',String(!selected));
+    });
+    prev.disabled=activeCut===0;
+    next.disabled=activeCut===3;
+  }
+  function goToCut(value){ activeCut=Math.max(0,Math.min(3,value)); render(); }
+  tabs.forEach(tab => tab.addEventListener('click',()=>{
+    if (groups.some(g=>g.id===tab.dataset.guideTab)) {
+      activeGroup=tab.dataset.guideTab;
+      activeCut=0;
+      render();
+    }
+  }));
+  prev.addEventListener('click',()=>goToCut(activeCut-1));
+  next.addEventListener('click',()=>goToCut(activeCut+1));
+  dots.forEach((dot,i)=>dot.addEventListener('click',()=>goToCut(i)));
+  stage.addEventListener('keydown',event=>{
+    if(event.key==='ArrowLeft'){event.preventDefault();goToCut(activeCut-1);}
+    if(event.key==='ArrowRight'){event.preventDefault();goToCut(activeCut+1);}
+    if(event.key==='Home'){event.preventDefault();goToCut(0);}
+    if(event.key==='End'){event.preventDefault();goToCut(3);}
+  });
+  let touchStart=null;
+  stage.addEventListener('touchstart',e=>{
+    if(e.touches.length===1) touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
+  },{passive:true});
+  stage.addEventListener('touchend',e=>{
+    if(!touchStart||e.changedTouches.length!==1) return;
+    const dx=e.changedTouches[0].clientX-touchStart.x;
+    const dy=e.changedTouches[0].clientY-touchStart.y;
+    touchStart=null;
+    if(Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)*1.3) goToCut(activeCut+(dx<0?1:-1));
+  },{passive:true});
+  stage.addEventListener('touchcancel',()=>{touchStart=null;});
+  render();
+})();
+</script>
 </body>
 </html>
