@@ -1160,6 +1160,41 @@
   #integratedMapFrame { height: 100% !important; min-height: 0 !important; }
 }
 
+
+/* Maum:On institution guide webtoon */
+.maeum-guide{color:var(--ink,#413b3c)}
+.maeum-guide-lead{padding:8px 4px 18px}
+.maeum-guide-lead h3{font-size:clamp(1.35rem,3vw,1.8rem);margin:7px 0 8px;line-height:1.35}
+.maeum-guide-lead p{margin:0;color:#70686a;line-height:1.7}
+.maeum-guide-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:8px 0 22px}
+.maeum-guide-tab{border:1px solid #eadcda;background:#fffaf8;color:#51494b;border-radius:14px;padding:12px 8px;font:inherit;font-size:.92rem;font-weight:700;cursor:pointer;transition:.18s}
+.maeum-guide-tab.active{background:#f8e9e9;border-color:#c98e91;color:#8d555f;box-shadow:0 3px 10px #9d6d6d16}
+.maeum-guide-panel{animation:maeumGuideIn .22s ease}
+.maeum-guide-panel[hidden]{display:none}
+@keyframes maeumGuideIn{from{opacity:.35;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.maeum-guide-heading{display:flex;align-items:center;gap:13px;margin:6px 0 16px}
+.maeum-guide-number{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:14px;background:#f5e8e6;color:#a66f75;font-weight:800}
+.maeum-guide-heading h4{font-size:1.25rem;margin:0 0 4px}
+.maeum-guide-heading p{margin:0;color:#756d6f;line-height:1.5;font-size:.94rem}
+.maeum-comic-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.maeum-comic-grid figure{margin:0;border:1px solid #eee2df;border-radius:14px;overflow:hidden;background:#fff}
+.maeum-comic-grid img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+.maeum-comic-grid figcaption{padding:10px 11px 12px;display:grid;gap:5px;line-height:1.5}
+.maeum-comic-grid figcaption b{font-size:.9rem;color:#51494b}
+.maeum-comic-grid figcaption span{font-size:.82rem;color:#746c6e}
+.maeum-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.maeum-info-grid>div{background:#fbf7f5;border:1px solid #f0e7e3;border-radius:14px;padding:15px}
+.maeum-info-grid b{display:block;margin-bottom:7px;color:#8e6268}
+.maeum-info-grid p{margin:0;color:#5e5759;font-size:.9rem;line-height:1.7}
+.maeum-guide-tip{margin:12px 0 0;padding:12px 14px;border-left:3px solid #c98e91;background:#fff8f6;border-radius:0 10px 10px 0;color:#685d5f;font-size:.88rem;line-height:1.65}
+.maeum-guide-footer{margin-top:20px;padding:17px;border-radius:15px;background:#f5f1f7;border:1px solid #e9e2ed}
+.maeum-guide-footer b{color:#6f617a}
+.maeum-guide-footer p{margin:7px 0 10px;line-height:1.6;color:#5d5662}
+.maeum-guide-footer small{display:block;color:#817985;line-height:1.55}
+@media(max-width:760px){.maeum-guide-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.maeum-comic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.maeum-info-grid{grid-template-columns:1fr}}
+@media(max-width:390px){.maeum-comic-grid{gap:7px}.maeum-comic-grid figcaption{padding:8px}.maeum-comic-grid figcaption b{font-size:.82rem}.maeum-comic-grid figcaption span{font-size:.76rem}}
+
+.maeum-guide-sources{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:14px;padding-top:12px;border-top:1px solid #e5dce8;font-size:.82rem}.maeum-guide-sources b{width:100%;color:#6f617a}.maeum-guide-sources a{color:#806b8d;text-decoration:underline;text-underline-offset:3px}
 </style>
 <style>
 /* First visit guide - FAQ and warning signs */
@@ -1313,49 +1348,6 @@
   } else { removeCoverHeading(); }
 })();
 </script>
-<style id="maeum-guide-card-style-repair">
-
-/* 마음온 첫 방문 가이드: 기관별 서비스/비용 카드 스타일 복구 (2026-11-23) */
-#firstVisitComic.maeum-guide {width:100%;max-width:100%;margin-inline:auto;color:#51464a;}
-#firstVisitComic .maeum-guide-lead {margin:4px 0 18px;}
-#firstVisitComic .maeum-guide-lead h3 {margin:10px 0 8px;color:#493f43;font-size:clamp(22px,3.2vw,32px);font-weight:850;line-height:1.3;letter-spacing:-.055em;}
-#firstVisitComic .maeum-guide-lead p {margin:0;color:#75696e;font-size:clamp(13px,1.75vw,15px);line-height:1.7;overflow-wrap:anywhere;}
-#firstVisitComic .maeum-guide-panel {margin:0;padding:22px;border:1px solid #e9dcdd;border-radius:22px;background:linear-gradient(150deg,#fffdfb,#fff9f7);box-shadow:0 8px 26px rgba(89,65,75,.055);min-width:0;}
-#firstVisitComic .maeum-guide-panel[hidden] {display:none!important;}
-#firstVisitComic .maeum-guide-heading {display:flex;align-items:center;gap:14px;margin:0 0 20px;min-width:0;}
-#firstVisitComic .maeum-guide-number {width:56px;height:56px;flex:0 0 56px;display:flex;justify-content:center;align-items:center;background:#f4e5e6;border-radius:17px;color:#a7707b;font-size:21px;font-weight:850;line-height:1;}
-#firstVisitComic .maeum-guide-heading > div {min-width:0;flex:1;}
-#firstVisitComic .maeum-guide-heading h4 {margin:0 0 6px;font-size:clamp(18px,2.2vw,23px);font-weight:850;line-height:1.3;letter-spacing:-.045em;color:#503f46;}
-#firstVisitComic .maeum-guide-heading p {margin:0;font-size:clamp(13px,1.65vw,14px);color:#82747a;line-height:1.65;overflow-wrap:anywhere;}
-#firstVisitComic .maeum-info-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;min-width:0;}
-#firstVisitComic .maeum-info-grid>div {min-width:0;background:#fff;border:1px solid #efe4e4;border-radius:17px;padding:18px 19px;box-shadow:0 3px 10px rgba(86,68,73,.025);}
-#firstVisitComic .maeum-info-grid b {display:block;font-size:15px;line-height:1.5;font-weight:800;color:#75515d;margin:0 0 9px;}
-#firstVisitComic .maeum-info-grid p {font-size:14px;line-height:1.78;color:#5c5257;margin:0;overflow-wrap:anywhere;word-break:keep-all;}
-#firstVisitComic .maeum-guide-tip {margin:16px 0 0;padding:14px 17px;border-radius:14px;background:#f9f0ef;color:#705e64;font-size:13px;line-height:1.8;overflow-wrap:anywhere;}
-#firstVisitComic .maeum-guide-footer {margin:18px 0 0;padding:20px;background:#fffaf8;border:1px solid #e9dfe0;border-radius:20px;color:#6b5b60;overflow-wrap:anywhere;}
-#firstVisitComic .maeum-guide-footer>b {display:block;color:#6e4d58;font-size:16px;font-weight:850;margin-bottom:7px;}
-#firstVisitComic .maeum-guide-footer>p {font-size:14px;line-height:1.72;margin:0 0 10px;}
-#firstVisitComic .maeum-guide-footer>small {display:block;font-size:12px;line-height:1.7;color:#887a7d;margin:0 0 12px;}
-#firstVisitComic .maeum-guide-sources {display:flex;flex-wrap:wrap;align-items:center;gap:8px;border-top:1px solid #ede1e1;padding-top:13px;}
-#firstVisitComic .maeum-guide-sources>b {font-size:13px;line-height:1.5;font-weight:800;color:#775460;margin-right:4px;}
-#firstVisitComic .maeum-guide-sources>a {display:inline-flex;align-items:center;min-height:34px;padding:7px 11px;border:1px solid #e9d5da;border-radius:999px;background:#fff;color:#936875!important;text-decoration:none!important;line-height:1.45;font-size:12px;font-weight:650;max-width:100%;overflow-wrap:anywhere;}
-#firstVisitComic .maeum-guide-sources>a:hover {background:#f8ecef;border-color:#d4b4be;}
-#firstVisitComic .maeum-guide-sources>a:focus-visible {outline:2px solid #a56b82;outline-offset:2px;}
-@media(max-width:680px){
- #firstVisitComic .maeum-guide-panel{padding:16px;border-radius:18px;}
- #firstVisitComic .maeum-guide-heading{gap:10px;margin-bottom:14px;align-items:flex-start;}
- #firstVisitComic .maeum-guide-number{width:44px;height:44px;flex-basis:44px;border-radius:14px;font-size:17px;}
- #firstVisitComic .maeum-info-grid{grid-template-columns:minmax(0,1fr);gap:10px;}
- #firstVisitComic .maeum-info-grid>div{padding:14px 15px;border-radius:14px;}
- #firstVisitComic .maeum-info-grid b{font-size:14px;margin-bottom:5px;}
- #firstVisitComic .maeum-info-grid p{font-size:13px;line-height:1.7;}
- #firstVisitComic .maeum-guide-tip{font-size:12px;padding:12px;}
- #firstVisitComic .maeum-guide-footer{padding:15px;border-radius:16px;}
- #firstVisitComic .maeum-guide-sources{gap:7px;}
- #firstVisitComic .maeum-guide-sources>b{width:100%;}
- #firstVisitComic .maeum-guide-sources>a{font-size:11.5px;}
-}
-</style>
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
