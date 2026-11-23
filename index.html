@@ -1601,11 +1601,10 @@
             <p id="typeComfortQuote" aria-live="polite">점검 결과에 맞는 위로의 한마디를 준비하고 있어요.</p>
           </div>
         </section>
-        <!-- 기존 유형별 맞춤 마음 케어 추천 유지 -->
-        <div class="care-rec-grid" id="tailoredCareCards"></div>
+        <!-- 안내 카드 3개를 제거하고 결과 행동 버튼만 유지 -->
         <div class="result-actions">
-          <button class="secondary-button" id="goOnboardingFromResultBtn" type="button">상담은 어떻게 진행될까?</button>
-          <button class="primary-button" id="goCareFromResultBtn" type="button">맞춤 마음 케어실 실행하기</button>
+          <button class="primary-button" id="goOnboardingFromResultBtn" type="button">상담은 어떻게 진행될까?</button>
+          <button class="secondary-button" id="goCareFromResultBtn" type="button">맞춤 마음 케어실 실행하기</button>
           <button class="secondary-button" id="goHistoryFromResultBtn" type="button">변화 리포트 보기</button>
           <button class="secondary-button" id="retryButton" type="button">다시 검사하기</button>
         </div>
@@ -2376,18 +2375,6 @@
         setLevel('stressLevel', totals.stress);
         $('progressCount').textContent = '9 / 9';
         $('progressFill').style.width = '100%';
-
-        // Render tailored care cards
-        const careBox = $('tailoredCareCards');
-        careBox.innerHTML = type.cares.map(c => `
-          <div class="care-rec-item">
-            <div>
-              <span class="care-rec-tag">${c.tag}</span>
-              <h4>${c.title}</h4>
-              <p>${c.desc}</p>
-            </div>
-          </div>
-        `).join('');
 
         // Update Care Studio & Onboarding subtitles with personalized context
         $('careSubtitle').textContent = `최근 점검 결과 [${type.name} · ${type.short}]에 맞춘 호흡과 감정 정리 도구입니다.`;
