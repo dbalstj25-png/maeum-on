@@ -1427,6 +1427,42 @@
 }
 @media(max-width:350px){#resultScreen .result-actions {grid-template-columns:minmax(0,1fr);}}
 </style>
+<style id="maumon-emotion-checkin-style">
+
+/* Only the new final quiz step. The original nine scored questions keep their layout. */
+#emotionCheckinPanel[hidden], #choiceArea[hidden] { display:none !important; }
+.emotion-checkin-panel { width:100%; margin:12px auto 0; }
+.emotion-checkin-hint { margin:0 0 14px; color:#74656b; font-size:13px; line-height:1.7; }
+.emotion-checkin-hint strong { color:#9e6c7a; }
+.emotion-slider-wrap { padding:14px 15px 10px; border:1px solid rgba(130,106,110,.15); border-radius:18px; background:rgba(255,250,247,.72); }
+.emotion-slider-current { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:14px; color:#7b6b70; font-size:12px; font-weight:750; }
+.emotion-slider-current output { color:#a06c83; font-size:16px; font-weight:850; text-align:right; }
+.emotion-score-slider { display:block; width:100%; height:12px; margin:13px 0 15px; padding:0; border-radius:999px; appearance:none; -webkit-appearance:none; cursor:pointer; touch-action:pan-y; background:linear-gradient(to right, #c092a2 0%, #c092a2 var(--emotion-progress,50%), #e8dfdf var(--emotion-progress,50%), #e8dfdf 100%); }
+.emotion-score-slider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:30px; height:30px; border-radius:50%; border:4px solid #fffaf7; background:#b58599; box-shadow:0 2px 10px rgba(117,77,98,.27); cursor:grab; }
+.emotion-score-slider::-moz-range-thumb { width:24px; height:24px; border-radius:50%; border:4px solid #fffaf7; background:#b58599; box-shadow:0 2px 10px rgba(117,77,98,.27); cursor:grab; }
+.emotion-score-slider:active::-webkit-slider-thumb { cursor:grabbing; }
+.emotion-score-slider:focus-visible { outline:3px solid #9b6d85; outline-offset:6px; }
+.emotion-slider-ends { display:flex; justify-content:space-between; gap:16px; font-size:11px; font-weight:700; color:#7e7174; }
+.emotion-slider-ends span:last-child { text-align:right; }
+.emotion-memo-label { display:block; margin:17px 0 8px; color:#594d51; font-size:13px; font-weight:850; }
+.emotion-memo-label span { font-size:11px; font-weight:600; color:#8a7d80; }
+.emotion-memo-textarea { width:100%; min-height:105px; padding:14px 15px; border:1px solid rgba(130,106,110,.24); background:rgba(255,255,255,.85); border-radius:15px; resize:vertical; font:inherit; font-size:13px; line-height:1.6; color:#594d51; }
+.quiz-screen.emotion-step .quiz-scene { bottom:auto; height:282px; }
+.quiz-screen.emotion-step .quiz-scene .character-holder { height:285px; max-width:45%; }
+.quiz-screen.emotion-step .dialogue-area { position:relative; left:auto; bottom:auto; width:min(850px,calc(100% - 36px)); margin:292px auto 0; padding-bottom:26px; }
+.quiz-screen.emotion-step .dialogue-card { padding:20px 24px; }
+.quiz-screen.emotion-step .question-text { font-size:clamp(22px,2.4vw,28px); }
+@media (max-width:700px) {
+  .emotion-slider-wrap { padding:13px 12px 9px; }
+  .quiz-screen.emotion-step .quiz-scene { height:220px; }
+  .quiz-screen.emotion-step .quiz-scene .character-holder { height:220px; max-width:55%; }
+  .quiz-screen.emotion-step .dialogue-area { margin-top:226px; width:calc(100% - 26px); }
+  .quiz-screen.emotion-step .dialogue-card { padding:17px 18px; }
+  .emotion-slider-current { align-items:flex-start; }
+  .emotion-memo-textarea { min-height:98px; }
+}
+@media (max-width:390px) { .emotion-slider-ends { font-size:10px; } .emotion-slider-current output { font-size:14px; } }
+</style>
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -1452,7 +1488,7 @@
 
       <div class="top-right">
         <div class="progress-block" id="progressBlock" aria-label="검사 진행률" style="visibility:hidden">
-          <div class="progress-top"><span>검사 진행</span><span class="progress-count" id="progressCount">0 / 9</span></div>
+          <div class="progress-top"><span>검사 진행</span><span class="progress-count" id="progressCount">0 / 10</span></div>
           <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
         </div>
         <button class="menu-button" id="guideButton" type="button">검사 안내</button>
@@ -1542,6 +1578,17 @@
           <button class="choice-button" type="button" data-score="3" aria-pressed="false"><span class="score-dot">3</span><span>자주 그렇다 (1주 이상)</span></button>
           <button class="choice-button" type="button" data-score="4" aria-pressed="false"><span class="score-dot">4</span><span>거의 매일 그렇다 (거의 2주)</span></button>
         </div>
+          <!-- Optional reflection text and required 0-10 check-in after the existing 9 scored questions. -->
+          <div id="emotionCheckinPanel" class="emotion-checkin-panel" hidden>
+            <p class="emotion-checkin-hint">오늘 하루의 마음은 어땠나요? <strong>0점은 매우 힘든 하루, 10점은 매우 좋은 하루</strong>를 뜻해요.</p>
+            <div class="emotion-slider-wrap">
+              <div class="emotion-slider-current"><span>오늘의 감정 점수</span><output id="emotionScoreOutput" for="emotionScoreSlider" aria-live="polite">슬라이더를 움직여 선택해 주세요</output></div>
+              <input id="emotionScoreSlider" class="emotion-score-slider" type="range" min="0" max="10" step="1" value="5" aria-label="오늘의 감정 점수" aria-describedby="emotionScoreScale" style="--emotion-progress:50%">
+              <div class="emotion-slider-ends" id="emotionScoreScale"><span>0점 · 매우 힘든 하루</span><span>10점 · 매우 좋은 하루</span></div>
+            </div>
+            <label class="emotion-memo-label" for="emotionMemoText">마음 메모 <span>선택 입력</span></label>
+            <textarea id="emotionMemoText" class="emotion-memo-textarea" rows="4" placeholder="오늘 어떤 일이 있었나요? 떠오르는 생각이나 감정을 판단 없이 자유롭게 적어보세요."></textarea>
+          </div>
         <div class="answer-nav">
           <button class="quiet-button" id="prevButton" type="button" disabled="">← 이전 문항</button>
           <button class="next-button" id="nextButton" type="button" disabled="">다음 질문 →</button>
@@ -1679,32 +1726,6 @@
               </div>
             </div>
           </article>
-
-          <!-- Daily Mood & Emotion Check-in -->
-          <article class="platform-card full-span">
-            <h3 class="card-title">📝 오늘의 감정 체크인 & 마음 메모 <span style="font-size:11px;font-weight:700;color:#8a7d80;">변화 리포트에 함께 기록됩니다</span></h3>
-            <div class="mood-picker" id="moodPicker">
-              <button class="mood-option" data-mood="평온함" data-score="5" type="button"><span class="m-emoji">😌</span><span class="m-label">평온함</span></button>
-              <button class="mood-option" data-mood="무난함" data-score="4" type="button"><span class="m-emoji">🙂</span><span class="m-label">무난함</span></button>
-              <button class="mood-option" data-mood="지침·무기력" data-score="3" type="button"><span class="m-emoji">😪</span><span class="m-label">지침·무기력</span></button>
-              <button class="mood-option" data-mood="불안·초조" data-score="2" type="button"><span class="m-emoji">😟</span><span class="m-label">불안·초조</span></button>
-              <button class="mood-option" data-mood="압박·예민" data-score="1" type="button"><span class="m-emoji">😣</span><span class="m-label">압박·예민</span></button>
-            </div>
-            <div style="font-size:11.5px;font-weight:800;color:#66585c;margin-bottom:6px;">영향을 준 요인 선택 (복수 선택 가능)</div>
-            <div class="tag-row" id="factorTags">
-              <button class="factor-tag" type="button">학업·업무</button>
-              <button class="factor-tag" type="button">대인관계</button>
-              <button class="factor-tag" type="button">수면·컨디션</button>
-              <button class="factor-tag" type="button">진로·미래걱정</button>
-              <button class="factor-tag" type="button">휴식·취미</button>
-              <button class="factor-tag" type="button">가족·생활환경</button>
-            </div>
-            <textarea class="journal-textarea" id="journalText" placeholder="오늘 어떤 일이 있었나요? 떠오르는 생각이나 감정을 판단 없이 자유롭게 적어보세요."></textarea>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap;gap:10px;">
-              
-              <button class="primary-button" id="saveCheckinBtn" type="button" style="padding:11px 20px;">오늘 기록 저장하기 ✓</button>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -1758,6 +1779,7 @@
               <span><i class="legend-dot" style="background:#c96d78;"></i>우울</span>
               <span><i class="legend-dot" style="background:#8b7ea8;"></i>불안</span>
               <span><i class="legend-dot" style="background:#70967c;"></i>스트레스</span>
+            <span><i class="legend-dot" style="background:#d19a57;"></i>감정체크인 (0~10점)</span>
             </div>
           </div>
           <div class="chart-container" id="trendChartBox"></div>
@@ -1770,7 +1792,7 @@
             <div class="history-list" id="assessmentHistoryList"></div>
           </article>
           <article class="platform-card">
-            <h3 class="card-title">📝 일일 감정 체크인 로그</h3>
+            <h3 class="card-title">📝 마음 메모</h3>
             <div class="history-list" id="checkinHistoryList"></div>
           </article>
         </div>
@@ -2184,6 +2206,8 @@
         selected: Array(questions.length).fill(null),
         currentTypeKey: 'stable',
         selectedMood: null,
+        emotionScore: null,
+        emotionNote: '',
         selectedFactors: new Set()
       };
 
@@ -2279,12 +2303,38 @@
         quizCharacter.classList.add(`mood-${mood}`, `pose-${pose}`);
       }
 
+      function syncEmotionSlider() {
+        const slider = $('emotionScoreSlider');
+        const score = state.emotionScore;
+        slider.value = String(score === null ? 5 : score);
+        slider.style.setProperty('--emotion-progress', `${Number(slider.value) * 10}%`);
+        $('emotionScoreOutput').textContent = score === null ? '슬라이더를 움직여 선택해 주세요' : `${score}점 / 10점`;
+      }
+
       function renderQuestion() {
+        const emotionStep = state.index === questions.length;
+        screens.quiz.classList.toggle('emotion-step', emotionStep);
+        $('emotionCheckinPanel').hidden = !emotionStep;
+        $('choiceArea').hidden = emotionStep;
+        if (emotionStep) {
+          $('progressCount').textContent = '10 / 10';
+          $('progressFill').style.width = '100%';
+          $('categoryTag').textContent = '오늘의 감정 체크인 · 마지막 문항 10/10';
+          $('questionText').textContent = '오늘의 감정 체크인';
+          $('mascotSpeech').textContent = '오늘 하루의 기분도 살펴볼까? 느낀 그대로 골라 줘.';
+          $('prevButton').disabled = false;
+          $('nextButton').disabled = state.emotionScore === null;
+          $('nextButton').textContent = '통합 결과 확인하기 →';
+          $('emotionMemoText').value = state.emotionNote;
+          syncEmotionSlider();
+          updateCharacter('warm', 1);
+          return;
+        }
         const q = questions[state.index];
         const selected = state.selected[state.index];
-        $('progressCount').textContent = `${state.index + 1} / 9`;
-        $('progressFill').style.width = `${((state.index + 1) / 9) * 100}%`;
-        $('categoryTag').textContent = `${q.domainLabel} · 문항 ${state.index + 1}/9`;
+        $('progressCount').textContent = `${state.index + 1} / 10`;
+        $('progressFill').style.width = `${((state.index + 1) / 10) * 100}%`;
+        $('categoryTag').textContent = `${q.domainLabel} · 문항 ${state.index + 1}/10`;
         $('questionText').textContent = q.text;
         const reactions = {
           1: '그렇구나. 편안하게 답해 줘서 고마워!',
@@ -2304,13 +2354,14 @@
         });
         $('prevButton').disabled = state.index === 0;
         $('nextButton').disabled = selected === null;
-        $('nextButton').textContent = state.index === 8 ? '통합 결과 확인하기 →' : '다음 질문 →';
+        $('nextButton').textContent = '다음 질문 →';
 
         if (selected === null) updateCharacter(state.index % 2 === 0 ? 'warm' : 'smile', (state.index % 4) + 1);
         else updateCharacter(selected === 1 ? 'smile' : selected === 2 ? 'warm' : selected === 3 ? 'alert' : 'tired', (state.index % 4) + 1);
       }
 
       function choose(score) {
+        if (state.index >= questions.length) return;
         state.selected[state.index] = score;
         renderQuestion();
       }
@@ -2373,7 +2424,7 @@
         setLevel('depressionLevel', totals.depression);
         setLevel('anxietyLevel', totals.anxiety);
         setLevel('stressLevel', totals.stress);
-        $('progressCount').textContent = '9 / 9';
+        $('progressCount').textContent = '10 / 10';
         $('progressFill').style.width = '100%';
 
         // Update Care Studio & Onboarding subtitles with personalized context
@@ -2382,30 +2433,54 @@
           $('onboardingSubtitle').textContent = `최근 점검 결과 [${type.name} · ${type.short}]에 맞춰 정신건강기관의 특징과 방문 전에 알아둘 정보를 확인해 보세요.`;
         }
 
-        // Save to local history
+        // Save original 9-question assessment and the separate 0–10 emotion rating together.
+        // Existing historical entries and their scoring remain untouched.
+        const savedAt = new Date();
+        const savedId = savedAt.getTime();
         const history = loadStorage(STORAGE_KEYS.assessments);
         history.unshift({
-          id: Date.now(),
-          date: new Date().toISOString(),
+          id: savedId,
+          date: savedAt.toISOString(),
           typeKey,
           typeName: type.name,
           typeShort: type.short,
-          totals
+          totals,
+          emotionScore: state.emotionScore
         });
         saveStorage(STORAGE_KEYS.assessments, history.slice(0, 30));
+
+        const checkins = loadStorage(STORAGE_KEYS.checkins);
+        checkins.unshift({
+          id: savedId,
+          date: savedAt.toISOString(),
+          mood: { label: '오늘의 감정 체크인', score: state.emotionScore, emoji: '📝' },
+          scoreScale: 10,
+          factors: [],
+          note: state.emotionNote
+        });
+        saveStorage(STORAGE_KEYS.checkins, checkins.slice(0, 50));
         updateHistoryBadge();
 
         state.index = 0;
         state.selected = Array(questions.length).fill(null);
+        state.emotionScore = null;
+        state.emotionNote = '';
+        $('emotionMemoText').value = '';
         updateIntroQuizButtons();
         switchPlatformView('result');
         showToast('점검 결과가 변화 리포트에 자동 저장되었습니다.');
       }
 
       function next() {
+        if (state.index === questions.length) {
+          if (state.emotionScore === null) return;
+          state.emotionNote = $('emotionMemoText').value.trim();
+          showResult();
+          return;
+        }
         if (state.selected[state.index] === null) return;
-        if (state.index < questions.length - 1) { state.index += 1; renderQuestion(); }
-        else showResult();
+        state.index += 1;
+        renderQuestion();
       }
 
       function previous() {
@@ -2413,7 +2488,7 @@
       }
 
       function hasInProgressQuiz() {
-        return state.selected.some(v => v !== null);
+        return state.selected.some(v => v !== null) || state.emotionScore !== null || state.emotionNote.trim().length > 0;
       }
 
       function updateIntroQuizButtons() {
@@ -2421,10 +2496,10 @@
         const resumeBtn = $('resumeQuizBtn');
         if (!startBtn || !resumeBtn) return;
         if (hasInProgressQuiz()) {
-          const answeredCount = state.selected.filter(v => v !== null).length;
+          const answeredCount = state.selected.filter(v => v !== null).length + (state.emotionScore !== null ? 1 : 0);
           startBtn.innerHTML = '처음부터 새로 시작하기 <span aria-hidden="true">↻</span>';
           resumeBtn.style.display = 'inline-flex';
-          resumeBtn.textContent = `이어하기 (${answeredCount}/9 완료) →`;
+          resumeBtn.textContent = `이어하기 (${answeredCount}/10 완료) →`;
         } else {
           startBtn.innerHTML = '자가점검 시작하기 <span aria-hidden="true">→</span>';
           resumeBtn.style.display = 'none';
@@ -2434,6 +2509,9 @@
       function startFreshQuiz() {
         state.index = 0;
         state.selected = Array(questions.length).fill(null);
+        state.emotionScore = null;
+        state.emotionNote = '';
+        $('emotionMemoText').value = '';
         updateIntroQuizButtons();
         switchPlatformView('quiz');
         renderQuestion();
@@ -2442,6 +2520,9 @@
       function resetQuiz() {
         state.index = 0;
         state.selected = Array(questions.length).fill(null);
+        state.emotionScore = null;
+        state.emotionNote = '';
+        $('emotionMemoText').value = '';
         updateIntroQuizButtons();
         switchPlatformView('check');
       }
@@ -2563,50 +2644,6 @@
         showToast('그라운딩 입력칸을 비웠습니다.');
       });
 
-      /* ================= CARE STUDIO: DAILY CHECK-IN ================= */
-      document.querySelectorAll('.mood-option').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.mood-option').forEach(b => b.classList.remove('selected'));
-          btn.classList.add('selected');
-          state.selectedMood = { label: btn.dataset.mood, score: Number(btn.dataset.score), emoji: btn.querySelector('.m-emoji').textContent };
-        });
-      });
-
-      document.querySelectorAll('.factor-tag').forEach(btn => {
-        btn.addEventListener('click', () => {
-          btn.classList.toggle('selected');
-          const txt = btn.textContent;
-          if (state.selectedFactors.has(txt)) state.selectedFactors.delete(txt);
-          else state.selectedFactors.add(txt);
-        });
-      });
-
-      $('saveCheckinBtn').addEventListener('click', () => {
-        const note = $('journalText').value.trim();
-        if (!state.selectedMood && !note) {
-          showToast('오늘의 기분이나 메모 중 하나 이상을 입력해 주세요.');
-          return;
-        }
-        const checkins = loadStorage(STORAGE_KEYS.checkins);
-        checkins.unshift({
-          id: Date.now(),
-          date: new Date().toISOString(),
-          mood: state.selectedMood || { label: '기록됨', score: 3, emoji: '📝' },
-          factors: Array.from(state.selectedFactors),
-          note
-        });
-        saveStorage(STORAGE_KEYS.checkins, checkins.slice(0, 50));
-        updateHistoryBadge();
-
-        // Reset form
-        $('journalText').value = '';
-        state.selectedMood = null;
-        state.selectedFactors.clear();
-        document.querySelectorAll('.mood-option').forEach(b => b.classList.remove('selected'));
-        document.querySelectorAll('.factor-tag').forEach(b => b.classList.remove('selected'));
-        showToast('오늘의 감정 체크인이 저장되었습니다.');
-      });
-
       /* ================= HISTORY & TREND RENDERING ================= */
       function renderTrendSVG(records) {
         const box = $('trendChartBox');
@@ -2619,11 +2656,12 @@
         const chartW = W - padL - padR;
         const chartH = H - padT - padB;
 
-        const yPos = val => padT + chartH - (val / 9) * chartH;
+        // Common axis 0–10. Original three domains remain 0–9, emotion rating is 0–10.
+        const yPos = val => padT + chartH - (val / 10) * chartH;
         const xPos = idx => data.length === 1 ? padL + chartW / 2 : padL + (idx / (data.length - 1)) * chartW;
 
         let gridLines = '';
-        [0, 3, 6, 9].forEach(v => {
+        [0, 3, 6, 9, 10].forEach(v => {
           const y = yPos(v);
           const isThresh = v === 3;
           gridLines += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="${isThresh ? '#c98e91' : 'rgba(105,83,81,.12)'}" stroke-dasharray="${isThresh ? '4 4' : 'none'}" stroke-width="1"/>`;
@@ -2633,17 +2671,27 @@
         const series = [
           { key: 'depression', color: '#c96d78' },
           { key: 'anxiety', color: '#8b7ea8' },
-          { key: 'stress', color: '#70967c' }
+          { key: 'stress', color: '#70967c' },
+          { key: 'emotionScore', color: '#d19a57' }
         ];
 
         let paths = '';
-        series.forEach(s => {
-          const pts = data.map((d, i) => `${xPos(i)},${yPos(d.totals[s.key])}`).join(' ');
-          if (data.length > 1) {
-            paths += `<polyline fill="none" stroke="${s.color}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" points="${pts}"/>`;
-          }
-          data.forEach((d, i) => {
-            paths += `<circle cx="${xPos(i)}" cy="${yPos(d.totals[s.key])}" r="4.5" fill="#fffaf7" stroke="${s.color}" stroke-width="2.4"/>`;
+        series.forEach(seriesItem => {
+          // Older assessments without emotion ratings stay visible; no scores are invented.
+          const points = data.map((d, i) => ({ x: xPos(i), value: seriesItem.key === 'emotionScore' ? d.emotionScore : d.totals[seriesItem.key] }));
+          let segment = [];
+          const flush = () => {
+            if (segment.length > 1) paths += `<polyline fill="none" stroke="${seriesItem.color}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" points="${segment.join(' ')}"/>`;
+            segment = [];
+          };
+          points.forEach(p => {
+            if (!Number.isFinite(p.value)) { flush(); return; }
+            segment.push(`${p.x},${yPos(p.value)}`);
+          });
+          flush();
+          points.forEach(p => {
+            if (!Number.isFinite(p.value)) return;
+            paths += `<circle cx="${p.x}" cy="${yPos(p.value)}" r="4.5" fill="#fffaf7" stroke="${seriesItem.color}" stroke-width="2.4"/>`;
           });
         });
 
@@ -2654,7 +2702,7 @@
           labels += `<text x="${xPos(i)}" y="${H - 10}" text-anchor="middle" font-size="10" fill="#6f6165" font-weight="700">${lbl} (${d.typeName.replace('형','')})</text>`;
         });
 
-        box.innerHTML = `<svg class="trend-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="영역별 점수 변화 추이 차트">${gridLines}${paths}${labels}</svg>`;
+        box.innerHTML = `<svg class="trend-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="우울 불안 스트레스(0~9점), 감정체크인(0~10점) 점수 변화 추이 차트">${gridLines}${paths}${labels}</svg>`;
       }
 
       function renderHistoryScreen() {
@@ -2709,16 +2757,17 @@
 
         const cList = $('checkinHistoryList');
         if (!checkins.length) {
-          cList.innerHTML = '<p style="font-size:12px;color:#8a7d80;margin:8px 0;">저장된 감정 체크인 기록이 없습니다.</p>';
+          cList.innerHTML = '<p style="font-size:12px;color:#8a7d80;margin:8px 0;">저장된 마음 메모가 없습니다.</p>';
         } else {
+          const safeText = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
           cList.innerHTML = checkins.map(item => `
             <div class="history-item" style="align-items:flex-start;flex-direction:column;gap:8px;">
               <div style="display:flex;justify-content:space-between;width:100%;align-items:center;">
-                <strong style="font-size:12.5px;color:#4e4246;">${item.mood.emoji} ${item.mood.label}</strong>
+                <strong style="font-size:12.5px;color:#4e4246;">${safeText(item.mood?.emoji || '📝')} ${safeText(item.mood?.label || '마음 메모')}${item.scoreScale === 10 ? ` · ${item.mood.score}/10점` : ''}</strong>
                 <span style="font-size:11px;color:#8a7d80;">${formatDate(item.date)}</span>
               </div>
               ${item.factors && item.factors.length ? `<div style="display:flex;gap:5px;flex-wrap:wrap;">${item.factors.map(f => `<span style="font-size:10px;background:#e8efe9;color:#556e5c;padding:2px 8px;border-radius:99px;font-weight:750;">#${f}</span>`).join('')}</div>` : ''}
-              ${item.note ? `<p style="margin:0;font-size:12px;color:#685b5f;line-height:1.55;">${item.note.replace(/</g, '&lt;')}</p>` : ''}
+              ${item.note ? `<p style="margin:0;font-size:12px;color:#685b5f;line-height:1.55;">${safeText(item.note).replace(/\n/g, '<br>')}</p>` : ''}
             </div>
           `).join('');
         }
@@ -2817,6 +2866,13 @@
       $('backToCheckFromCare').addEventListener('click', () => switchPlatformView('check'));
 
       choiceButtons.forEach(btn => btn.addEventListener('click', () => choose(Number(btn.dataset.score))));
+      $('emotionScoreSlider').addEventListener('input', event => {
+        state.emotionScore = Number(event.target.value);
+        syncEmotionSlider();
+        $('nextButton').disabled = false;
+        updateIntroQuizButtons();
+      });
+      $('emotionMemoText').addEventListener('input', event => { state.emotionNote = event.target.value; });
       $('nextButton').addEventListener('click', next);
       $('prevButton').addEventListener('click', previous);
       $('retryButton').addEventListener('click', resetQuiz);
@@ -2832,7 +2888,8 @@
       document.addEventListener('keydown', e => {
         if ($('guideModal').classList.contains('open')) { if (e.key === 'Escape') closeGuide(); return; }
         if (!screens.quiz.classList.contains('active')) return;
-        if (['1','2','3','4'].includes(e.key)) choose(Number(e.key));
+        if (e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+        if (state.index < questions.length && ['1','2','3','4'].includes(e.key)) choose(Number(e.key));
         if (e.key === 'ArrowRight' || e.key === 'Enter') { if (!e.target.closest('button')) next(); }
         if (e.key === 'ArrowLeft') { if (!e.target.closest('button')) previous(); }
       });
