@@ -1462,6 +1462,42 @@
   .emotion-memo-textarea { min-height:98px; }
 }
 @media (max-width:390px) { .emotion-slider-ends { font-size:10px; } .emotion-slider-current output { font-size:14px; } }
+/* FIX: the tenth (emotion check-in) step must not inherit the fixed-height quiz
+   composition or the 226px spacer used in its old mobile layout.
+   Scope all rules to this screen and only to small viewports. */
+@media (max-width:640px) {
+  #quizScreen.emotion-step.screen.active {
+    height:auto;
+    min-height:calc(100dvh - 62px);
+    max-height:none;
+    overflow:visible;
+    padding-bottom:calc(106px + env(safe-area-inset-bottom));
+  }
+  #quizScreen.emotion-step .quiz-scene {
+    position:relative;
+    inset:auto;
+    height:clamp(138px,23dvh,190px);
+    min-height:0;
+    max-height:none;
+    flex:0 0 clamp(138px,23dvh,190px);
+  }
+  #quizScreen.emotion-step .quiz-scene .character-holder {
+    height:100%;
+    max-width:none;
+  }
+  #quizScreen.emotion-step .dialogue-area {
+    position:relative;
+    inset:auto;
+    order:2;
+    width:calc(100% - 24px);
+    margin:12px auto 0;
+    padding:0;
+    flex:0 0 auto;
+    min-height:0;
+    max-height:none;
+    overflow:visible;
+  }
+}
 </style>
 </head>
 <body>
